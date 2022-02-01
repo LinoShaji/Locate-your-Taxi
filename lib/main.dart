@@ -1,6 +1,6 @@
 import 'package:cloned/loginscreen.dart';
+import 'package:cloned/main_screen.dart';
 import 'package:cloned/registration_screen.dart';
-import 'package:cloned/registrationscreen2.dart';
 import 'package:cloned/sprinkle.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -19,9 +19,9 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       title: 'Taxi Rider App',
-      home: RegistrationScreen2(),
+      home: LoginScreen(),
       // home: const Sprinkle(),
     );
   }
