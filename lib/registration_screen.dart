@@ -21,15 +21,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController phoneTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
+  TextEditingController passwordTextEditingController2 = TextEditingController();
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   void registerNewUser(BuildContext context) async {
     final User? firebaseUser = (await _firebaseAuth
-            .createUserWithEmailAndPassword(
-                email: emailTextEditingController.text,
-                password: passwordTextEditingController.text)
-            .catchError((errMsg) {
+        .createUserWithEmailAndPassword(
+        email: emailTextEditingController.text,
+        password: passwordTextEditingController.text)
+        .catchError((errMsg) {
       displayToastMessage("Error:  " + errMsg.toString(), context);
     }))
         .user;
@@ -45,8 +46,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
       displayToastMessage(
           "Congratulation, your user account has been created. ", context);
 
-      Navigator.push(
-          context, MaterialPageRoute(builder: (context) => MainScreen()));
+      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>MainScreen()), (route) => false);
     } else {
       displayToastMessage("New user account has not been created", context);
     }
@@ -82,7 +82,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 animatedTexts: [
                   TyperAnimatedText('Regsiter As A Rider',
                       textStyle:
-                          const TextStyle(color: Colors.black, fontSize: 20)),
+                      const TextStyle(color: Colors.black, fontSize: 20)),
                 ],
                 totalRepeatCount: 1,
               ),
@@ -120,6 +120,17 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       : Icons.visibility),
                 ),
               ),
+              AppFormField(
+                inputType: TextInputType.visiblePassword,
+                hintText: 'Re-enter your password',
+                controller: passwordTextEditingController2,
+                isObscure: !_isObscure,
+                icon: InkWell(
+                  onTap: toggleVisibility,
+                  child: Icon(_isObscure == false
+                      ? Icons.visibility_off
+                      : Icons.visibility),
+                ),),
               Container(
                 width: 250,
                 child: RaisedButton(
@@ -135,7 +146,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                     } else if (passwordTextEditingController.text.length < 6) {
                       (displayToastMessage(
                           "Password must be atleast 7 charecters", context));
-                    } else {
+                    }else if(passwordTextEditingController.text != passwordTextEditingController2.text){
+                      displayToastMessage('passwords does not match', context);
+                    }
+                    else {
                       registerNewUser(context);
                     }
                   },
@@ -176,13 +190,12 @@ class AppFormField extends StatelessWidget {
   final bool? isObscure;
   final Widget? icon;
 
-  const AppFormField(
-      {Key? key,
-      required this.inputType,
-      required this.hintText,
-      required this.controller,
-      this.isObscure,
-      this.icon})
+  const AppFormField({Key? key,
+    required this.inputType,
+    required this.hintText,
+    required this.controller,
+    this.isObscure,
+    this.icon})
       : super(key: key);
 
   @override
