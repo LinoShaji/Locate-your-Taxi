@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cloned/loginscreen.dart';
 import 'package:cloned/main.dart';
 import 'package:cloned/main_screen.dart';
+import 'package:cloned/widgets/progressdialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -26,11 +27,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   void registerNewUser(BuildContext context) async {
+    showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context)
+        {
+          return ProgressDialog(message: "Registering, please wait...",);
+        }
+    );
     final User? firebaseUser = (await _firebaseAuth
         .createUserWithEmailAndPassword(
         email: emailTextEditingController.text,
         password: passwordTextEditingController.text)
         .catchError((errMsg) {
+          Navigator.pop(context);
       displayToastMessage("Error:  " + errMsg.toString(), context);
     }))
         .user;
@@ -47,7 +57,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           "Congratulation, your user account has been created. ", context);
 
       Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>MainScreen()), (route) => false);
-    } else {
+    }
+    else
+    {
+      Navigator.pop(context);
       displayToastMessage("New user account has not been created", context);
     }
   }

@@ -1,5 +1,6 @@
 import 'package:cloned/main_screen.dart';
 import 'package:cloned/registration_screen.dart';
+import 'package:cloned/widgets/progressdialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -36,26 +37,48 @@ class _LoginScreenState extends State<LoginScreen> {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   void loginAndAuthenticateUser(BuildContext context) async {
-     User? firebaseUser = (await _firebaseAuth
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return ProgressDialog(message: "Authenticating please wait ");
+        });
+    final User? firebaseUser = (await _firebaseAuth
             .signInWithEmailAndPassword(
                 email: emailTextEditingController.text,
                 password: passwordTextEditingController.text)
             .catchError((errMsg) {
+              Navigator.pop(context);
       displayToastMessage('Error: ' + errMsg.toString(), context);
     }))
         .user;
-
     if (firebaseUser != null) {
-      userRef
-          .child(firebaseUser.uid)
-          .once()
-          .then((value) => (DataSnapshot snap) {
-            if(snap.value != null)
-                {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, MainScreen.idScreen, (route) => false);
-                }
-              });
+      try {
+        print("proceeded");
+        FirebaseDatabase.instance
+            .ref()
+            .child("user/${firebaseUser.uid}")
+            .once()
+            .then((snap) {
+          if (snap.snapshot.value != null) {
+            print("proceeded 3");
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (_) => MainScreen()),
+                (route) => false);
+          } else {
+            _firebaseAuth.signOut();
+            displayToastMessage(
+                "No records exists for this user. please create a new account",
+                context);
+          }
+        });
+      } catch (e) {
+        print('mmmm');
+        print(e);
+      }
+    } else {
+      Navigator.pop(context);
+      displayToastMessage("Error occured cannot be signed in", context);
     }
   }
 
@@ -152,11 +175,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 color: Colors.yellow,
                 onPressed: () {
                   if (!emailTextEditingController.text.contains("@")) {
+                    print("email format is correct");
                     displayToastMessage('incorrect form of email', context);
                   } else if (passwordTextEditingController.text.isEmpty) {
+                    print("password format correct");
                     displayToastMessage(
                         'password is of incorrect form', context);
                   } else {
+                    print("proceeded to login and authenticate");
                     loginAndAuthenticateUser(context);
                   }
                 },
