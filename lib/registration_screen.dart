@@ -4,7 +4,6 @@ import 'package:cloned/main.dart';
 import 'package:cloned/main_screen.dart';
 import 'package:cloned/widgets/progressdialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -24,46 +23,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   TextEditingController passwordTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController2 = TextEditingController();
 
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
-  void registerNewUser(BuildContext context) async {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (BuildContext context)
-        {
-          return ProgressDialog(message: "Registering, please wait...",);
-        }
-    );
-    final User? firebaseUser = (await _firebaseAuth
-        .createUserWithEmailAndPassword(
-        email: emailTextEditingController.text,
-        password: passwordTextEditingController.text)
-        .catchError((errMsg) {
-          Navigator.pop(context);
-      displayToastMessage("Error:  " + errMsg.toString(), context);
-    }))
-        .user;
-
-    if (User != null) {
-      Map userDataMap = {
-        "name": nameTextEditingController.text.trim(),
-        "email": emailTextEditingController.text.trim(),
-        "phone": phoneTextEditingController.text.trim(),
-      };
-
-      userRef.child(firebaseUser!.uid).set(userDataMap);
-      displayToastMessage(
-          "Congratulation, your user account has been created. ", context);
-
-      Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>MainScreen()), (route) => false);
-    }
-    else
-    {
-      Navigator.pop(context);
-      displayToastMessage("New user account has not been created", context);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -147,25 +106,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               Container(
                 width: 250,
                 child: RaisedButton(
-                  onPressed: () {
-                    if (nameTextEditingController.text.length < 3) {
-                      Fluttertoast.showToast(
-                          msg: "Name must be atleast 3 charecters. ");
-                    } else if (!emailTextEditingController.text.contains("@")) {
-                      displayToastMessage(
-                          "Email address is not valid", context);
-                    } else if (phoneTextEditingController.text.isEmpty) {
-                      displayToastMessage("Phone number is mandatory", context);
-                    } else if (passwordTextEditingController.text.length < 6) {
-                      (displayToastMessage(
-                          "Password must be atleast 7 charecters", context));
-                    }else if(passwordTextEditingController.text != passwordTextEditingController2.text){
-                      displayToastMessage('passwords does not match', context);
-                    }
-                    else {
-                      registerNewUser(context);
-                    }
-                  },
+                  onPressed: () {},
                   child: const Text(
                     'Create Account',
                     style: TextStyle(fontWeight: FontWeight.w600),

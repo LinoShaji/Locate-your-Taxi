@@ -1,12 +1,7 @@
-import 'package:cloned/main_screen.dart';
 import 'package:cloned/registration_screen.dart';
-import 'package:cloned/widgets/progressdialog.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
-import 'main.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -34,53 +29,6 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
 
-  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-
-  void loginAndAuthenticateUser(BuildContext context) async {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return ProgressDialog(message: "Authenticating please wait ");
-        });
-    final User? firebaseUser = (await _firebaseAuth
-            .signInWithEmailAndPassword(
-                email: emailTextEditingController.text,
-                password: passwordTextEditingController.text)
-            .catchError((errMsg) {
-              Navigator.pop(context);
-      displayToastMessage('Error: ' + errMsg.toString(), context);
-    }))
-        .user;
-    if (firebaseUser != null) {
-      try {
-        print("proceeded");
-        FirebaseDatabase.instance
-            .ref()
-            .child("user/${firebaseUser.uid}")
-            .once()
-            .then((snap) {
-          if (snap.snapshot.value != null) {
-            print("proceeded 3");
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (_) => MainScreen()),
-                (route) => false);
-          } else {
-            _firebaseAuth.signOut();
-            displayToastMessage(
-                "No records exists for this user. please create a new account",
-                context);
-          }
-        });
-      } catch (e) {
-        print('mmmm');
-        print(e);
-      }
-    } else {
-      Navigator.pop(context);
-      displayToastMessage("Error occured cannot be signed in", context);
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             AnimatedTextKit(
               animatedTexts: [
-                TyperAnimatedText('Login As A Rider',
+                TyperAnimatedText('Login As A User',
                     textStyle:
                         const TextStyle(color: Colors.white, fontSize: 20)),
               ],
@@ -173,19 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.w100),
                 ),
                 color: Colors.yellow,
-                onPressed: () {
-                  if (!emailTextEditingController.text.contains("@")) {
-                    print("email format is correct");
-                    displayToastMessage('incorrect form of email', context);
-                  } else if (passwordTextEditingController.text.isEmpty) {
-                    print("password format correct");
-                    displayToastMessage(
-                        'password is of incorrect form', context);
-                  } else {
-                    print("proceeded to login and authenticate");
-                    loginAndAuthenticateUser(context);
-                  }
-                },
+                onPressed: () {},
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24.0),
                 ),
