@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Taxi Rider App',
-      home: Maps(),
+      home: LoginScreen(),
       // home: const Sprinkle(),
     );
   }

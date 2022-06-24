@@ -1,3 +1,5 @@
+import 'package:cloned/main_screen.dart';
+import 'package:cloned/maps.dart';
 import 'package:cloned/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -121,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.w100),
                 ),
                 color: Colors.yellow,
-                onPressed: () {},
+                onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (_)=> Maps()));},
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24.0),
                 ),
