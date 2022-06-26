@@ -123,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.w100),
                 ),
                 color: Colors.yellow,
-                onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (_)=> Maps()));},
+                onPressed: () {Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> Maps()));},
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24.0),
                 ),

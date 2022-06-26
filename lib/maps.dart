@@ -21,6 +21,7 @@ class _MapsState extends State<Maps> {
         body: Stack(
           children: [
             const GoogleMapsWidget(
+              mapType: MapType.hybrid,
               mapToolbarEnabled: true,
               compassEnabled: true,
               myLocationButtonEnabled: true,
