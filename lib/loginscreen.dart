@@ -3,6 +3,7 @@ import 'package:cloned/maps.dart';
 import 'package:cloned/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:geolocator/geolocator.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -13,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
   bool _showPassword = true;
   bool _obscureText = true;
 
