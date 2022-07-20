@@ -45,6 +45,7 @@ dependencies:
   geolocator: ^8.2.1
   location: ^4.4.0
   geocoding: ^2.0.4
+  google_maps_controller: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -94,6 +95,10 @@ flutter:
       fonts:
         - asset: lib/asset/fonts/RobotoCondensed-Bold.ttf
         - asset: lib/asset/fonts/RobotoCondensed-Light.ttf
+    - family: lato
+      fonts:
+        - asset: lib/asset/fonts/Lato-Black.ttf
+        - asset: lib/asset/fonts/Lato-BlackItalic.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

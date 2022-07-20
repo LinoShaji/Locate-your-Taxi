@@ -1,9 +1,10 @@
-import 'package:cloned/main_screen.dart';
 import 'package:cloned/maps.dart';
 import 'package:cloned/registration_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
-import 'package:geolocator/geolocator.dart';
+
+import 'mapstest.dart';
+
 
 
 class LoginScreen extends StatefulWidget {
@@ -16,7 +17,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
 
   bool _showPassword = true;
-  bool _obscureText = true;
+
 
   void _togglevisibility() {
     setState(() {
@@ -24,11 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  void _toggle() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
 
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
@@ -125,7 +121,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontWeight: FontWeight.w100),
                 ),
                 color: Colors.yellow,
-                onPressed: () {Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> Maps()));},
+                onPressed: () {Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=> MapsTest()));},
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24.0),
                 ),
