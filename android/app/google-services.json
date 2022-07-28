@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "511694591617",
-    "project_id": "flutter-uber-clone-e306d",
-    "storage_bucket": "flutter-uber-clone-e306d.appspot.com"
+    "project_number": "345889655397",
+    "project_id": "l-taxi-e03c2",
+    "storage_bucket": "l-taxi-e03c2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:511694591617:android:3905e908e06a7342091f80",
+        "mobilesdk_app_id": "1:345889655397:android:00caa9fc0f9b394bfa148c",
         "android_client_info": {
           "package_name": "com.example.cloned"
         }
       },
       "oauth_client": [
         {
-          "client_id": "511694591617-psudqmgksoa8lp425smibo3e2ialr6oe.apps.googleusercontent.com",
+          "client_id": "345889655397-i25vaaaja4jncief8l3g6d00ltfk3d5q.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDwvxtWu7OXhUW2KZ1njIJ9vw_OjsDsaxk"
+          "current_key": "AIzaSyBiqIcRqF-eGdDyvNQGkeMk0rTDfRSwuUQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "511694591617-psudqmgksoa8lp425smibo3e2ialr6oe.apps.googleusercontent.com",
+              "client_id": "345889655397-i25vaaaja4jncief8l3g6d00ltfk3d5q.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

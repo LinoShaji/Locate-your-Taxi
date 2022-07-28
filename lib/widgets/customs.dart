@@ -1,5 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+
 
 class AppFormField2 extends StatefulWidget {
   final String hintText;
@@ -20,20 +22,55 @@ class AppFormField2 extends StatefulWidget {
 class _AppFormFieldState2 extends State<AppFormField2> {
   @override
   Widget build(BuildContext context) {
-    return Container(width: 300,height: 70,
-      padding: EdgeInsets.only(top: 20,left: 10, right: 10),
-      child: TextFormField(style: TextStyle(fontFamily: 'lato'),
+    return Container(
+      decoration: BoxDecoration(color: Colors.transparent,
+          borderRadius: BorderRadius.circular(20)),
+      width: 300,
+      height: 70,
+      padding: EdgeInsets.only(top: 10, left: 10, right: 10),
+      child: TextFormField(
+        style: TextStyle(fontFamily: 'lato'),
         decoration: InputDecoration(
+          focusedBorder: InputBorder.none,
+          enabledBorder: InputBorder.none,
+          errorBorder: InputBorder.none,
+          disabledBorder: InputBorder.none,
           hintStyle: TextStyle(fontFamily: 'lato'),
           filled: true,
           fillColor: Colors.white,
           prefixIcon: widget.Icon,
           hintText: widget.hintText,
           border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(40),
-              borderSide: BorderSide(color: Colors.white)),
+            borderRadius: BorderRadius.circular(40),
+          ),
         ),
       ),
     );
   }
 }
+
+class CstmTxtBtn extends StatefulWidget {
+  const CstmTxtBtn({Key? key}) : super(key: key);
+
+  @override
+  State<CstmTxtBtn> createState() => _CstmTxtBtnState();
+}
+
+class _CstmTxtBtnState extends State<CstmTxtBtn> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.only(top: 03),
+      child: TextButton(
+          style: ButtonStyle(
+              backgroundColor:
+                  MaterialStateProperty.all<Color>(Color(0xffE7F6F2))),
+          onPressed: () {},
+          child: const Text(
+            'Locate Your Taxi',
+            style: TextStyle(color: Colors.black, fontFamily: 'lato'),
+          )),
+    );
+  }
+}
+
