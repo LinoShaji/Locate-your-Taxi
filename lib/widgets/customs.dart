@@ -1,6 +1,5 @@
 import'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 
 
 class AppFormField2 extends StatefulWidget {
@@ -35,14 +34,12 @@ class _AppFormFieldState2 extends State<AppFormField2> {
           enabledBorder: InputBorder.none,
           errorBorder: InputBorder.none,
           disabledBorder: InputBorder.none,
-          hintStyle: TextStyle(fontFamily: 'lato'),
+          hintStyle: TextStyle(fontFamily: 'Dongle',fontWeight: FontWeight.w400,fontSize: 22),
           filled: true,
           fillColor: Colors.white,
           prefixIcon: widget.Icon,
           hintText: widget.hintText,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(40),
-          ),
+
         ),
       ),
     );

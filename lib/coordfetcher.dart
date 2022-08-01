@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:geocoding/geocoding.dart' as geo;
 
 class CoordFetcher extends StatefulWidget {
   const CoordFetcher({Key? key}) : super(key: key);

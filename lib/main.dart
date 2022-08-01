@@ -1,6 +1,5 @@
-import 'package:cloned/loginscreen.dart';
-import 'package:cloned/maps.dart';
 import 'package:cloned/3rdscreenmaps.dart';
+import 'package:cloned/loginscreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +25,7 @@ class MyApp extends StatelessWidget {
   // }
 
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  const MaterialApp(
       title: 'Taxi Rider App',
       home: LoginScreen(),
       // home: const Sprinkle(),

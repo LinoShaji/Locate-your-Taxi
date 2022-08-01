@@ -1,12 +1,12 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cloned/loginscreen.dart';
 import 'package:cloned/3rdscreenmaps.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import 'main.dart';
-import 'main_screen.dart';
 
 class RegistrationScreen extends StatefulWidget {
   RegistrationScreen({Key? key}) : super(key: key);
@@ -16,13 +16,29 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  Future getUser(
+      {required String name,
+      required String phone,
+      required String email}) async {
+    final docUser = FirebaseFirestore.instance
+        .collection('users')
+        .doc(emailTextEditingController.text);
+    final json = {
+      'name': nameTextEditingController.text,
+      'email id': emailTextEditingController.text,
+      'phone number': phoneTextEditingController.text
+    };
+    await docUser.set(json);
+  }
+
   bool _isObscure = false;
 
   TextEditingController nameTextEditingController = TextEditingController();
   TextEditingController emailTextEditingController = TextEditingController();
   TextEditingController phoneTextEditingController = TextEditingController();
   TextEditingController passwordTextEditingController = TextEditingController();
-  TextEditingController passwordTextEditingController2 = TextEditingController();
+  TextEditingController passwordTextEditingController2 =
+      TextEditingController();
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
@@ -36,10 +52,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
 
     void registerNewUser(BuildContext context) async {
       final User? firebaseUser = (await _firebaseAuth
-          .createUserWithEmailAndPassword(
-          email: emailTextEditingController.text,
-          password: passwordTextEditingController.text)
-          .catchError((errMsg) {
+              .createUserWithEmailAndPassword(
+                  email: emailTextEditingController.text,
+                  password: passwordTextEditingController.text)
+              .catchError((errMsg) {
         displayToastMessage("Error:  " + errMsg.toString(), context);
       }))
           .user;
@@ -55,12 +71,12 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         displayToastMessage(
             "Congratulation, your user account has been created. ", context);
 
-        Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (_)=>MapsTest()), (route) => false);
+        Navigator.pushAndRemoveUntil(context,
+            MaterialPageRoute(builder: (_) => MapsTest()), (route) => false);
       } else {
         displayToastMessage("New user account has not been created", context);
       }
     }
-
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -150,10 +166,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                       displayToastMessage(
                           "password must contain atleast 7 charecters",
                           context);
-                    } else if (passwordTextEditingController.text != passwordTextEditingController2.text) {
+                    } else if (passwordTextEditingController.text !=
+                        passwordTextEditingController2.text) {
                       displayToastMessage("passwords doesnt match", context);
+                    } else {
+                      registerNewUser(context);
+                      getUser(
+                          name: nameTextEditingController.text,
+                          phone: phoneTextEditingController.text,
+                          email: emailTextEditingController.text);
                     }
-                    else {registerNewUser(context);}
                   },
                   child: const Text(
                     'Create Account',

@@ -1,33 +1,63 @@
 {
   "project_info": {
-    "project_number": "345889655397",
-    "project_id": "l-taxi-e03c2",
-    "storage_bucket": "l-taxi-e03c2.appspot.com"
+    "project_number": "936425188652",
+    "firebase_url": "https://driverapp-ec8fd-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "driverapp-ec8fd",
+    "storage_bucket": "driverapp-ec8fd.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:345889655397:android:00caa9fc0f9b394bfa148c",
+        "mobilesdk_app_id": "1:936425188652:android:401c3b5459da3eb6849089",
         "android_client_info": {
           "package_name": "com.example.cloned"
         }
       },
       "oauth_client": [
         {
-          "client_id": "345889655397-i25vaaaja4jncief8l3g6d00ltfk3d5q.apps.googleusercontent.com",
+          "client_id": "936425188652-kiovobafh0q2edf17fqes8rc1b4gi3ej.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBiqIcRqF-eGdDyvNQGkeMk0rTDfRSwuUQ"
+          "current_key": "AIzaSyB54f3rqsVoPl0A4e3wv_Bx9S5_2omcep4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "345889655397-i25vaaaja4jncief8l3g6d00ltfk3d5q.apps.googleusercontent.com",
+              "client_id": "936425188652-kiovobafh0q2edf17fqes8rc1b4gi3ej.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:936425188652:android:390a5b3e4b9d2ac7849089",
+        "android_client_info": {
+          "package_name": "com.example.r456"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "936425188652-kiovobafh0q2edf17fqes8rc1b4gi3ej.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB54f3rqsVoPl0A4e3wv_Bx9S5_2omcep4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "936425188652-kiovobafh0q2edf17fqes8rc1b4gi3ej.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

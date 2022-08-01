@@ -1,10 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_widget/google_maps_widget.dart';
-import 'package:geocoding/geocoding.dart' as geo;
-import 'package:location/location.dart';
 
 class Maps extends StatefulWidget {
   const Maps({Key? key}) : super(key: key);
